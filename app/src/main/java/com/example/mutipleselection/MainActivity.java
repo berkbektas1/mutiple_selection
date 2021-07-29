@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
     private int previousTotal;
     private boolean load = true;
     boolean isLoading = false;
-
-
+    
+    //
+    private String categories = "popular";
 
 
     @Override
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
     }
 
     private void parseJSON(){
-        String JSON_URL = "https://api.themoviedb.org/3/movie/popular?api_key=881a3e97e259d362b9f73333adff2199&page="+page;
+        String JSON_URL = "https://api.themoviedb.org/3/movie/"+categories+"?api_key=881a3e97e259d362b9f73333adff2199&page="+page;
         //Search:
         //https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
         //https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
                                 String imageBanner = "https://image.tmdb.org/t/p/w500" + ability.getString("backdrop_path");
                                 String story = ability.getString("overview");
                                 String release_date = ability.getString("release_date");
-                                float rating = ability.getLong("vote_average");
+                                float rating = (float) ability.getDouble("vote_average");
 
 
                                 //System.out.println(original_title);
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
     }
 
     private void getNext(final int page) {
-        String JSON_URL = "https://api.themoviedb.org/3/movie/popular?api_key=881a3e97e259d362b9f73333adff2199&page="+page;
+        String JSON_URL = "https://api.themoviedb.org/3/movie/"+categories+"?api_key=881a3e97e259d362b9f73333adff2199&page="+page;
         //System.out.println(JSON_URL);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, JSON_URL, null,
                 new Response.Listener<JSONObject>() {
@@ -213,10 +214,11 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
                                 String imageBanner = "https://image.tmdb.org/t/p/w500" + ability.getString("backdrop_path");
                                 String story = ability.getString("overview");
                                 String release_date = ability.getString("release_date");
-                                float rating = ability.getLong("vote_average");
+                                float rating = (float) ability.getDouble("vote_average");
                                 //System.out.println(jsonArray.length());
                                 //System.out.println(original_title +" "+ page);
                                 //System.out.println(imagePoster);
+                                //System.out.println(rating);
 
                                 tvShows.add(new TVShow(original_title,release_date,story,false,rating,imagePoster,imageBanner));
                                 tvShowsAdapter.notifyDataSetChanged();
@@ -236,6 +238,36 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
         });
 
         mRequestQueue.add(request);
+    }
+    
+    public void popular(View v){
+        categories = "popular";
+        Toast.makeText(this, categories, Toast.LENGTH_SHORT).show();
+        tvShows.clear();
+        page=1;
+        parseJSON();
+
+    }
+    public void topRated(View v){
+        categories = "top_rated";
+        Toast.makeText(this, categories, Toast.LENGTH_SHORT).show();
+        tvShows.clear();
+        page=1;
+        parseJSON();
+    }
+    public void nowPlaying(View v){
+        categories = "now_playing";
+        Toast.makeText(this, categories, Toast.LENGTH_SHORT).show();
+        tvShows.clear();
+        page=1;
+        parseJSON();
+    }
+    public void upcoming(View v){
+        categories = "upcoming";
+        Toast.makeText(this, categories, Toast.LENGTH_SHORT).show();
+        tvShows.clear();
+        page=1;
+        parseJSON();
     }
 
 

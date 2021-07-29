@@ -33,7 +33,7 @@
             android:gravity="center"
             android:text="Movies"
             android:textColor="@color/colorTextIcons"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
         
         <ImageView
@@ -43,6 +43,78 @@
             android:src="@drawable/ic_search_black_24dp"
             app:tint="@color/colorTextIcons"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader">
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/button_background"
+                    android:onClick="popular"
+                    android:padding="8dp"
+                    android:text="Popular"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/button_background"
+                    android:onClick="topRated"
+                    android:padding="8dp"
+                    android:text="Top Rated"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/button_background"
+                    android:onClick="nowPlaying"
+                    android:padding="8dp"
+                    android:text="Now Playing"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/button_background"
+                    android:onClick="upcoming"
+                    android:padding="8dp"
+                    android:text="Upcoming"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvShowsRecyclerView"
@@ -53,7 +125,7 @@
         android:padding="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/buttonAddToWatchlist"
-        app:layout_constraintTop_toBottomOf="@id/layoutHeader" />
+        app:layout_constraintTop_toBottomOf="@id/cardView" />
 
     <ProgressBar
         android:id="@+id/idPBLoading"

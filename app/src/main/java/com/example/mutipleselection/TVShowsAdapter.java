@@ -92,7 +92,7 @@ public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TvShowVi
             textName.setText(tvShow.name);
             textCreatedBy.setText(tvShow.createdBy);
             textStory.setText(tvShow.story);
-            ratingBar.setRating(tvShow.rating);
+            ratingBar.setRating((float) tvShow.rating);
             if (tvShow.isSelected){
                 viewBackground.setBackgroundResource(R.drawable.container_selected_background);
                 imageSelected.setVisibility(View.VISIBLE);
@@ -104,31 +104,30 @@ public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TvShowVi
             layoutTVShow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*
-                    if (tvShow.isSelected) {
-                        viewBackground.setBackgroundResource(R.drawable.container_background);
-                        imageSelected.setVisibility(View.GONE);
-                        tvShow.isSelected = false;
-                        if (getSelectedTvShow().size() == 0) {
-                            tvShowsListener.onTVShowAction(false);
+                    if (getSelectedTvShow().size() > 0){
+                        if (tvShow.isSelected) {
+                            viewBackground.setBackgroundResource(R.drawable.container_background);
+                            imageSelected.setVisibility(View.GONE);
+                            tvShow.isSelected = false;
+                            if (getSelectedTvShow().size() == 0) {
+                                tvShowsListener.onTVShowAction(false);
+                            }
+                        }else {
+                            viewBackground.setBackgroundResource(R.drawable.container_selected_background);
+                            imageSelected.setVisibility(View.VISIBLE);
+                            tvShow.isSelected = true;
+                            tvShowsListener.onTVShowAction(true);
                         }
-                    }else {
-                        viewBackground.setBackgroundResource(R.drawable.container_selected_background);
-                        imageSelected.setVisibility(View.VISIBLE);
-                        tvShow.isSelected = true;
-                        tvShowsListener.onTVShowAction(true);
+                    }else{
+                        //Intent
+
+                        Intent intent = new Intent(v.getContext(),DetailActivity.class);
+                        intent.putExtra("movieName", tvShow.name);
+                        intent.putExtra("rating", tvShow.rating);
+                        intent.putExtra("story", tvShow.story);
+                        intent.putExtra("banner", tvShow.imageBanner);
+                        v.getContext().startActivity(intent);
                     }
-                    */
-                    //Intent
-
-                    Intent intent = new Intent(v.getContext(),DetailActivity.class);
-                    intent.putExtra("movieName", tvShow.name);
-                    intent.putExtra("rating", tvShow.rating);
-                    intent.putExtra("story", tvShow.story);
-                    intent.putExtra("banner", tvShow.imageBanner);
-                    v.getContext().startActivity(intent);
-
-
                 }
             });
 

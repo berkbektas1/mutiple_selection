@@ -48,6 +48,7 @@ public class DetailActivity extends AppCompatActivity {
         textRating.setText(String.valueOf(rating));
         textStory.setText(movieStory);
         Picasso.get().load(imageBanner).into(imageMovie);
+        System.out.println(rating);
 
         imageBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
