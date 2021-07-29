@@ -134,11 +134,11 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
                                //System.out.println(imagePoster);
 
 
-
+                                //System.out.println(original_title + page);
                                 tvShows.add(new TVShow(original_title,release_date,story,false,rating,imagePoster,imageBanner));
                                 tvShowsAdapter = new TVShowsAdapter(tvShows, MainActivity.this);
                                 tvShowsRecyclerView.setAdapter(tvShowsAdapter);
-                                System.out.println(tvShows.size());
+                                //System.out.println(tvShows.size());
 
                             }
 
@@ -178,15 +178,14 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
                 if (load){
                     if (totalItemCount > previousTotal){
                         previousTotal = totalItemCount;
-                        page++;
                         load=false;
                     }
                 }
                 if (!load && (firstVisibleItem + visibleItemCount) >= totalItemCount){
+                    page++;
                     getNext(page);
                     load = true;
-
-                    System.out.println("Page:"+page+"firstVisibleItem:"+firstVisibleItem+"visibleItemCount"+visibleItemCount+"totalItemCount:"+totalItemCount);
+                    //System.out.println("Page:"+page+"firstVisibleItem:"+firstVisibleItem+"visibleItemCount"+visibleItemCount+"totalItemCount:"+totalItemCount);
                 }
 
 
@@ -195,9 +194,9 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
 
     }
 
-    private void getNext(int page) {
+    private void getNext(final int page) {
         String JSON_URL = "https://api.themoviedb.org/3/movie/popular?api_key=881a3e97e259d362b9f73333adff2199&page="+page;
-        System.out.println(JSON_URL);
+        //System.out.println(JSON_URL);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, JSON_URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -215,15 +214,12 @@ public class MainActivity extends AppCompatActivity implements TVShowsListener {
                                 String story = ability.getString("overview");
                                 String release_date = ability.getString("release_date");
                                 float rating = ability.getLong("vote_average");
-
-                                //System.out.println(original_title);
+                                //System.out.println(jsonArray.length());
+                                //System.out.println(original_title +" "+ page);
                                 //System.out.println(imagePoster);
 
                                 tvShows.add(new TVShow(original_title,release_date,story,false,rating,imagePoster,imageBanner));
-                                tvShowsAdapter = new TVShowsAdapter(tvShows, MainActivity.this);
-                                tvShowsRecyclerView.setAdapter(tvShowsAdapter);
-
-
+                                tvShowsAdapter.notifyDataSetChanged();
                             }
 
                         }catch (JSONException e){

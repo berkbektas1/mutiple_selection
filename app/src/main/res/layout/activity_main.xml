@@ -54,6 +54,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/buttonAddToWatchlist"
         app:layout_constraintTop_toBottomOf="@id/layoutHeader" />
+
     <ProgressBar
         android:id="@+id/idPBLoading"
         android:layout_width="match_parent"
