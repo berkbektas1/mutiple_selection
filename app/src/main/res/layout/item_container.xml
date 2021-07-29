@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:isIndicator="true"
-        android:numStars="5"
+        android:numStars="10"
         android:theme="@style/RatingBar"
         app:layout_constraintStart_toStartOf="@id/textName"
         app:layout_constraintTop_toBottomOf="@id/textName"
