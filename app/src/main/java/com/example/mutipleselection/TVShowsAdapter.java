@@ -7,6 +7,8 @@ import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -21,11 +23,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TvShowViewHolder>{
+public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TvShowViewHolder> {
 
     private List<TVShow> tvShows;
     private TVShowsListener tvShowsListener;
-    private boolean longClickRecyclerView = false;
+
+
 
     public TVShowsAdapter(List<TVShow> tvShows, TVShowsListener tvShowsListener) {
         this.tvShows = tvShows;
@@ -64,6 +67,8 @@ public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TvShowVi
         }
         return selectedTvShows;
     }
+
+
 
     class TvShowViewHolder extends RecyclerView.ViewHolder {
 
@@ -120,7 +125,6 @@ public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TvShowVi
                         }
                     }else{
                         //Intent
-
                         Intent intent = new Intent(v.getContext(),DetailActivity.class);
                         intent.putExtra("movieName", tvShow.name);
                         intent.putExtra("rating", tvShow.rating);
@@ -148,12 +152,13 @@ public class TVShowsAdapter extends RecyclerView.Adapter<TVShowsAdapter.TvShowVi
                         tvShow.isSelected = true;
                         tvShowsListener.onTVShowAction(true);
                     }
-
-
                     return true;
                 }
             });
 
         }
     }
+
+
+
 }
